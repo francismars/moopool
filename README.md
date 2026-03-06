@@ -8,6 +8,25 @@ Bitcoin-inspired beef traceability infrastructure:
 
 Mupool is designed as real-world supply-chain infrastructure, not a tradable token product.
 
+## The Idea
+
+Mupool exists to make food trust verifiable.
+
+Today, beef supply chains often rely on fragmented records, manual reconciliation, and trust assumptions between parties that do not share a single source of truth. When something goes wrong (quality issue, compliance breach, recall), the cost is high, response is slow, and accountability is blurry.
+
+Our idea is simple:
+- treat each major lifecycle event as a signed, verifiable state transition
+- preserve custody history as an auditable lineage, not disconnected paperwork
+- define a strict real-world milestone for value completion: a cow is not "mined" until slaughter and cool-room confirmation are both complete
+
+The long-term vision is bigger than software tooling. We aim to create a trust layer that helps:
+- producers prove quality and handling standards
+- processors and distributors reduce disputes and compliance friction
+- auditors and regulators verify evidence faster
+- consumers and brands access reliable provenance claims
+
+Mupool starts with beef, but the model is designed to expand into broader protein and food traceability networks over time.
+
 ## Monorepo Layout
 
 - `apps/api`: Fastify API for transaction intake, queries, and audits
