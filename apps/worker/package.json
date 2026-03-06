@@ -1,0 +1,29 @@
+{
+  "name": "@mupool/worker",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/worker.ts",
+    "build": "tsc -p tsconfig.json",
+    "start": "node dist/worker.js",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run --passWithNoTests",
+    "lint": "echo \"No linter configured for @mupool/worker\""
+  },
+  "dependencies": {
+    "@mupool/crypto": "workspace:*",
+    "@mupool/db": "workspace:*",
+    "@mupool/domain": "workspace:*",
+    "bullmq": "^5.43.0",
+    "dotenv": "^16.4.7",
+    "ioredis": "^5.4.2",
+    "pino": "^9.6.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.10",
+    "tsx": "^4.19.3",
+    "typescript": "^5.8.2",
+    "vitest": "^3.0.9"
+  }
+}

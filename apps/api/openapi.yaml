@@ -1,0 +1,132 @@
+openapi: 3.1.0
+info:
+  title: Mupool API
+  version: 0.1.0
+servers:
+  - url: /api/v1
+paths:
+  /transactions/submit:
+    post:
+      summary: Submit transaction to moopool
+      responses:
+        "202":
+          description: Accepted
+  /transactions/validate:
+    post:
+      summary: Validate transaction without enqueue
+      responses:
+        "200":
+          description: Validation result
+  /transactions/{txId}:
+    get:
+      summary: Get transaction details
+      parameters:
+        - in: path
+          name: txId
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Transaction
+  /assets/{assetId}/current:
+    get:
+      summary: Get current UCowXO state
+      parameters:
+        - in: path
+          name: assetId
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Current asset state
+  /assets/{assetId}/provenance:
+    get:
+      summary: Get asset lineage
+      parameters:
+        - in: path
+          name: assetId
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Lineage data
+  /proofs/mined/{assetId}:
+    get:
+      summary: Get mined proof bundle
+      parameters:
+        - in: path
+          name: assetId
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Proof payload
+  /audit/events:
+    get:
+      summary: List events for audit
+      responses:
+        "200":
+          description: Event list
+  /audit/integrity:
+    get:
+      summary: Get integrity snapshot
+      responses:
+        "200":
+          description: Integrity state
+  /ucowxos/{ucowxoId}:
+    get:
+      summary: Get UCowXO by identifier
+      parameters:
+        - in: path
+          name: ucowxoId
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: UCowXO state
+  /actors/{orgId}:
+    get:
+      summary: Get actor and keys
+      parameters:
+        - in: path
+          name: orgId
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Actor details
+  /actors/{orgId}/keys:
+    post:
+      summary: Add actor key
+      parameters:
+        - in: path
+          name: orgId
+          required: true
+          schema:
+            type: string
+      responses:
+        "201":
+          description: Key created
+  /actors/{orgId}/keys/{keyId}/revoke:
+    post:
+      summary: Revoke actor key
+      parameters:
+        - in: path
+          name: orgId
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: keyId
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Key revoked

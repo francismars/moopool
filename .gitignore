@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.env
+.DS_Store
+coverage/
+pnpm-lock.yaml
+apps/dashboard/node_modules/
+apps/api/node_modules/
+apps/worker/node_modules/

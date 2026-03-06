@@ -1,0 +1,13 @@
+{
+  "name": "mupool",
+  "private": true,
+  "version": "0.1.0",
+  "packageManager": "pnpm@10.6.1",
+  "scripts": {
+    "build": "pnpm -r build",
+    "dev": "pnpm --filter @mupool/api dev",
+    "test": "pnpm -r test",
+    "lint": "pnpm -r lint",
+    "typecheck": "pnpm -r typecheck"
+  }
+}
