@@ -27,6 +27,18 @@ The long-term vision is bigger than software tooling. We aim to create a trust l
 
 Mupool starts with beef, but the model is designed to expand into broader protein and food traceability networks over time.
 
+## Founder Manifesto
+
+We believe trust in food should not be a marketing slogan. It should be provable.
+
+We are building Mupool for producers, operators, and communities who do the hard work and deserve systems that protect truth, not hide it behind fragmented paperwork and opaque intermediaries.
+
+We reject speculation-first models. We build utility-first infrastructure.
+
+Our mission is to make provenance undeniable, accountability immediate, and quality claims verifiable at scale.
+
+If the future of food is going to be more local, more resilient, and more sovereign, it needs a trust layer built by people who actually care about the real world. That is what Mupool is here to become.
+
 ## Monorepo Layout
 
 - `apps/api`: Fastify API for transaction intake, queries, and audits
