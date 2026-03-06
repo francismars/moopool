@@ -1,10 +1,12 @@
 # Mupool
 
-Bitcoin-inspired beef traceability using:
+Bitcoin-inspired beef traceability infrastructure:
 - `moopool` queue for pending lifecycle events
 - `UCowXO` unspent output model for cattle/carcass/lot state
 - Proof of Moo validator logic for role-based attestation and finality
-- mined state only after slaughter + cool-room confirmation
+- mined state only after slaughter + cool-room confirmation (`IN_COOL_ROOM_CONFIRMED`)
+
+Mupool is designed as real-world supply-chain infrastructure, not a tradable token product.
 
 ## Monorepo Layout
 
@@ -15,23 +17,60 @@ Bitcoin-inspired beef traceability using:
 - `packages/crypto`: canonical serialization, hashing, signature helpers
 - `packages/db`: PostgreSQL schema, migrations, replay/query helpers
 - `infra`: Docker Compose and operational scripts
+- `docs`: protocol, API, roadmap, investor, and budget docs
 
-## Quick Start
+## Run Locally
 
-1. Start infrastructure and services:
-   - `docker compose -f infra/docker-compose.yml up`
-2. Apply DB migration and seed:
+1. Install dependencies:
+   - `pnpm install`
+2. Start data services:
+   - `docker compose -f infra/docker-compose.yml up -d postgres redis`
+3. Apply DB migration and seed:
    - `pnpm --filter @mupool/db migrate`
    - `pnpm --filter @mupool/db seed`
-3. API: `http://localhost:4000`
-4. Dashboard: `http://localhost:4173`
+4. Start app services (separate terminals):
+   - API: `pnpm --filter @mupool/api dev`
+   - Worker: `pnpm --filter @mupool/worker dev`
+   - Dashboard: `pnpm --filter @mupool/dashboard dev -- --host 0.0.0.0 --port 4173`
+5. Open:
+   - API: `http://localhost:4000`
+   - Dashboard: `http://localhost:4173`
 
-For local API calls in dev, set request header:
+For local API calls in dev, set header:
 - `x-mupool-signature: dev`
 
-## Acceptance Signals
+## Core API Endpoints
+
+- `POST /api/v1/transactions/submit`
+- `POST /api/v1/transactions/validate`
+- `GET /api/v1/transactions/:txId`
+- `GET /api/v1/assets/:assetId/current`
+- `GET /api/v1/assets/:assetId/provenance`
+- `GET /api/v1/proofs/mined/:assetId`
+- `GET /api/v1/audit/events`
+- `GET /api/v1/audit/integrity`
+
+## Operations
+
+- Backup DB: `./infra/scripts/backup-db.sh`
+- Restore DB: `./infra/scripts/restore-db.sh <backup-file.sql>`
+- Replay integrity check: `pnpm --filter @mupool/db replay:check`
+- CI workflow: `.github/workflows/ci.yml`
+
+## Validation Signals
 
 - Duplicate spend attempts are rejected.
 - Slaughter and cool-room events enforce role thresholds.
 - Asset becomes mined only when state is `IN_COOL_ROOM_CONFIRMED`.
 - Provenance and mined-proof endpoints return auditable evidence.
+
+## Key Docs
+
+- Protocol spec: `docs/mupool-protocol.md`
+- UCowXO state model: `docs/ucowxo-state-model.md`
+- API spec: `docs/api-spec.md`
+- MVP roadmap: `docs/mvp-plan.md`
+- Release gate report: `docs/release-gate-report.md`
+- Investor/ops brief: `docs/mupool-investor-operations-brief.md`
+- Timeline and budget: `docs/mupool-timeline-and-budget.md`
+- Investor introduction letter: `docs/mupool-investor-introduction-letter.md`
